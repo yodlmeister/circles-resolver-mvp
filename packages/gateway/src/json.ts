@@ -1,5 +1,6 @@
 import { Database } from './server';
 import { readFileSync } from 'fs';
+import DATA from './offchainexample.eth.json';
 
 interface NameData {
   addresses?: { [coinType: number]: string };
@@ -26,6 +27,13 @@ export class JSONDatabase implements Database {
       }
     }
     this.ttl = ttl;
+  }
+
+  static fromTest(ttl: number) {
+    return new JSONDatabase(
+      DATA,
+      ttl
+    );
   }
 
   static fromFilename(filename: string, ttl: number) {
